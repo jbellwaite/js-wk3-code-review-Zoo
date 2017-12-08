@@ -1,14 +1,17 @@
 {
-  "name": "angular2-rename",
+  "name": "js-wk3-code-review-Zoo",
   "description": "",
   "main": "",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/jbellwaite/js-wk3-angular-template",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
+  ],
+  "authors": [
+    "Jessie <jess.bell@me.com>"
   ]
 }
