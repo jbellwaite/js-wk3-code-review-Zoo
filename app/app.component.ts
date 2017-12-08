@@ -64,6 +64,14 @@ import { Component } from '@angular/core';
     <ul>
     <li *ngFor="let youngAnimal of youngAnimals">{{youngAnimal.name}}</li>
     </ul>
+    </div>
+
+    <button (click)="checkOldAnimals()">Check to see which animals are old animals (<10 years old)</button>
+    <div *ngIf="showOldAnimals">
+    <ul>
+    <li *ngFor="let oldAnimal of oldAnimals">{{oldAnimal.name}}</li>
+    </ul>
+    </div>
   `
 })
 
@@ -73,8 +81,10 @@ export class AppComponent {
   ];
   selectedAnimal = null;
   youngAnimals: Animal[] = []
+  oldAnimals: Animal[] = []
   selectedKind: Animal = this.animals[0];
   showYoungAnimals: boolean = false;
+  showOldAnimals: boolean = false;
 
   newKind(species, name, age, diet, location, caretakers, sex, likes, dislikes) {
     let newAnimal = new Animal(species, name, age, diet, location, caretakers, sex, likes, dislikes);
@@ -96,6 +106,21 @@ export class AppComponent {
         this.youngAnimals.push(animal);
       } else{
       alert("There are no animals that are younger than 2 years old");
+    }
+    })
+  }
+
+  checkOldAnimals(){
+    this.showOldAnimals = !this.showOldAnimals;
+    this.getOldAnimals();
+  }
+
+  getOldAnimals() {
+    this.animals.forEach((animal) => {
+      if (animal.age < 10) {
+        this.oldAnimals.push(animal);
+      } else{
+      alert("There are no animals that are older than 10 years old");
     }
     })
   }
