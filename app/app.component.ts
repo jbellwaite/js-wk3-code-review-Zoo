@@ -78,6 +78,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   animals: Animal[] = [
     new Animal("Northwest Black Tailed Deer", "Tinkerbell", 8, "Herbivore", "Northern Trail", 2, "Female", "Delicate roots and leaves", "Loud noises"),
+    new Animal("Arctic Fox", "Moon", 1, "Carnivore", "Northern Trail", 5, "Female", "Cool shade", "Loud noises"),
+    new Animal("Ocelot", "Prince", 12, "Carnivore", "Tropical Rain Forest Building", 6, "Male", "Laying in the sunshine", "Non-rope-based toys"),
   ];
   selectedAnimal = null;
   youngAnimals: Animal[] = []
@@ -104,9 +106,7 @@ export class AppComponent {
     this.animals.forEach((animal) => {
       if (animal.age < 3) {
         this.youngAnimals.push(animal);
-      } else{
-      alert("There are no animals that are younger than 2 years old");
-    }
+      }
     })
   }
 
@@ -117,11 +117,9 @@ export class AppComponent {
 
   getOldAnimals() {
     this.animals.forEach((animal) => {
-      if (animal.age < 10) {
+      if (animal.age > 10) {
         this.oldAnimals.push(animal);
-      } else{
-      alert("There are no animals that are older than 10 years old");
-    }
+      }
     })
   }
 

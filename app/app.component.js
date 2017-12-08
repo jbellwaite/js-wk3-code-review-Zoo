@@ -11,6 +11,8 @@ var AppComponent = (function () {
     function AppComponent() {
         this.animals = [
             new Animal("Northwest Black Tailed Deer", "Tinkerbell", 8, "Herbivore", "Northern Trail", 2, "Female", "Delicate roots and leaves", "Loud noises"),
+            new Animal("Arctic Fox", "Moon", 1, "Carnivore", "Northern Trail", 5, "Female", "Cool shade", "Loud noises"),
+            new Animal("Ocelot", "Prince", 12, "Carnivore", "Tropical Rain Forest Building", 6, "Male", "Laying in the sunshine", "Non-rope-based toys"),
         ];
         this.selectedAnimal = null;
         this.youngAnimals = [];
@@ -36,9 +38,6 @@ var AppComponent = (function () {
             if (animal.age < 3) {
                 _this.youngAnimals.push(animal);
             }
-            else {
-                alert("There are no animals that are younger than 2 years old");
-            }
         });
     };
     AppComponent.prototype.checkOldAnimals = function () {
@@ -48,11 +47,8 @@ var AppComponent = (function () {
     AppComponent.prototype.getOldAnimals = function () {
         var _this = this;
         this.animals.forEach(function (animal) {
-            if (animal.age < 10) {
+            if (animal.age > 10) {
                 _this.oldAnimals.push(animal);
-            }
-            else {
-                alert("There are no animals that are older than 10 years old");
             }
         });
     };
