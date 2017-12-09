@@ -15,8 +15,19 @@ h1, h2, h3, h4 {
   font-family: $header;
 }
 
-.current-list {
+.current-list{
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.large-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list p{
+  margin: 0;
+  padding: 0;
 }
