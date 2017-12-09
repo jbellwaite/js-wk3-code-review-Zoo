@@ -4,10 +4,14 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
   <h1>Zoo</h1>
-    <ul>
-    <li (click)="viewAnimal(currentAnimal)" *ngFor="let currentAnimal of animals">{{currentAnimal.species}}</li>
-    </ul>
-
+  <div class="current-list">
+    <h2>Current List of Animals</h2>
+    <h4>Click to see details</h4>
+      <ul>
+      <li (click)="viewAnimal(currentAnimal)" *ngFor="let currentAnimal of animals">{{currentAnimal.species}}</li>
+      </ul>
+  </div>
+<h2>Add another animal</h2>
     <form>
       <label for="animalSpecies">Enter the animal's species</label>
       <input type="text" #animalSpecies><br>
