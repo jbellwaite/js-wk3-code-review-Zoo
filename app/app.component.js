@@ -15,6 +15,8 @@ var AppComponent = (function () {
             new animal_model_1.Animal("Arctic Fox", "Moon", 1, "Carnivore", "Northern Trail", 5, "Female", "Cool shade", "Loud noises"),
             new animal_model_1.Animal("Ocelot", "Prince", 12, "Carnivore", "Tropical Rain Forest Building", 6, "Male", "Laying in the sunshine", "Non-rope-based toys"),
         ];
+        this.youngAnimal = [];
+        this.oldAnimal = [];
         this.selectedAnimal = null;
         this.selectedKind = this.masterAnimalsList[0];
         this.addAnAnimal = null;
@@ -36,7 +38,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app-root',
-        template: "\n  <h1>Zoo</h1>\n  <div class=\"current-list\">\n  <h2>Current List of Animals</h2>\n  <h4>Click to see details</h4>\n    <ul>\n    <li (click)=\"viewAnimal(currentAnimal)\" *ngFor=\"let currentAnimal of masterAnimalsList\">{{currentAnimal.species}}</li>\n    </ul>\n  </div>\n\n    <div class=\"animal-wrapper\" *ngIf=\"selectedAnimal\">\n\n      <div class=\"large-wrapper\">\n        <div class=\"list\">\n          <h2>Species: {{selectedAnimal.species}}</h2>\n          <h3>Name: {{selectedAnimal.name}}</h3>\n          <p>Age: {{selectedAnimal.age}}</p>\n          <p>Diet: {{selectedAnimal.diet}}</p>\n          <p>Location: {{selectedAnimal.location}}</p>\n          <p>Number of Caretakers: {{selectedAnimal.caretakers}}</p>\n          <p>Sex: {{selectedAnimal.sex}}</p>\n          <p>Likes: {{selectedAnimal.likes}}</p>\n          <p>Dislikes: {{selectedAnimal.dislikes}}</p>\n        </div>\n      </div>\n\n        <h3>Edit Animal?</h3>\n\n        <edit-animal [childSelectedAnimal]=\"selectedAnimal\" (doneButtonClickedSender)=\"finishedEditing()\"></edit-animal>\n    </div>\n\n    <new-animal (newAnimalSender)=\"addAnimal($event)\"></new-animal>\n\n  "
+        template: "\n  <h1>Zoo</h1>\n  <div class=\"current-list\">\n  <h2>Current List of Animals</h2>\n  <h4>Click to see details</h4>\n    <ul>\n    <li (click)=\"viewAnimal(currentAnimal)\" *ngFor=\"let currentAnimal of masterAnimalsList\">{{currentAnimal.species}}</li>\n    </ul>\n  </div>\n\n    <div class=\"animal-wrapper\" *ngIf=\"selectedAnimal\">\n\n      <div class=\"large-wrapper\">\n        <div class=\"list\">\n          <h2>Species: {{selectedAnimal.species}}</h2>\n          <h3>Name: {{selectedAnimal.name}}</h3>\n          <p>Age: {{selectedAnimal.age}}</p>\n          <p>Diet: {{selectedAnimal.diet}}</p>\n          <p>Location: {{selectedAnimal.location}}</p>\n          <p>Number of Caretakers: {{selectedAnimal.caretakers}}</p>\n          <p>Sex: {{selectedAnimal.sex}}</p>\n          <p>Likes: {{selectedAnimal.likes}}</p>\n          <p>Dislikes: {{selectedAnimal.dislikes}}</p>\n        </div>\n      </div>\n\n        <h3>Edit Animal?</h3>\n\n        <edit-animal [childSelectedAnimal]=\"selectedAnimal\" (doneButtonClickedSender)=\"finishedEditing()\"></edit-animal>\n    </div>\n\n    <new-animal (newAnimalSender)=\"addAnimal($event)\"></new-animal>\n\n    <animal-list [childAnimalList]=\"masterAnimalsList\" (clickSender)=\"editAnimal($event)\"></animal-list>\n\n  "
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

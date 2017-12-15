@@ -13,6 +13,10 @@ var forms_1 = require("@angular/forms");
 var animal_model_1 = require("./animal.model");
 var edit_animal_component_1 = require("./edit-animal.component");
 var new_animal_component_1 = require("./new-animal.component");
+var animal_list_component_1 = require("./animal-list.component");
+var completeness_pipe_1 = require("./completeness.pipe");
+var completeness2_pipe_1 = require("./completeness2.pipe");
+// import { OldPipe } from './completeness.pipe';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,7 +28,9 @@ AppModule = __decorate([
             forms_1.FormsModule],
         declarations: [app_component_1.AppComponent,
             animal_model_1.Animal,
-            edit_animal_component_1.EditAnimalComponent, new_animal_component_1.NewAnimalComponent],
+            animal_list_component_1.AnimalListComponent,
+            edit_animal_component_1.EditAnimalComponent, new_animal_component_1.NewAnimalComponent,
+            completeness_pipe_1.CompletenessPipe, completeness2_pipe_1.Completeness2Pipe],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

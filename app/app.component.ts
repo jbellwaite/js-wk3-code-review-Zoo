@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }  from '@angular/forms';
+import { AnimalListComponent } from './animal-list.component';
 import { Animal } from './animal.model';
 import { EditAnimalComponent } from './edit-animal.component';
 import { NewAnimalComponent } from './new-animal.component';
@@ -41,6 +42,8 @@ import { NewAnimalComponent } from './new-animal.component';
 
     <new-animal (newAnimalSender)="addAnimal($event)"></new-animal>
 
+    <animal-list [childAnimalList]="masterAnimalsList" (clickSender)="editAnimal($event)"></animal-list>
+
   `
 })
 
@@ -51,6 +54,8 @@ export class AppComponent {
     new Animal("Ocelot", "Prince", 12, "Carnivore", "Tropical Rain Forest Building", 6, "Male", "Laying in the sunshine", "Non-rope-based toys"),
   ];
 
+  youngAnimal = [];
+  oldAnimal = [];
   selectedAnimal = null;
   selectedKind: Animal = this.masterAnimalsList[0];
   addAnAnimal = null;
@@ -63,7 +68,7 @@ export class AppComponent {
       this.selectedAnimal = clickedAnimal;
     }
 
-    finishedEditing() {
+  finishedEditing() {
    this.selectedAnimal = null;
  }
 
