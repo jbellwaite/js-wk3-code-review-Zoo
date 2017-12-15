@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }  from '@angular/forms';
+import { Animal } from './animal.model';
+import { EditAnimalComponent } from './edit-animal.component';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +13,7 @@ import { Component } from '@angular/core';
   <h2>Current List of Animals</h2>
   <h4>Click to see details</h4>
     <ul>
-    <li (click)="viewAnimal(currentAnimal)" *ngFor="let currentAnimal of animals">{{currentAnimal.species}}</li>
+    <li (click)="viewAnimal(currentAnimal)" *ngFor="let currentAnimal of masterAnimalsList">{{currentAnimal.species}}</li>
     </ul>
   </div>
 
@@ -29,121 +34,42 @@ import { Component } from '@angular/core';
       </div>
 
         <h3>Edit Animal?</h3>
-        <label>Edit Animal Name:</label>
-        <input [(ngModel)]="selectedAnimal.species">
-        <input [(ngModel)]="selectedAnimal.name">
-        <input [(ngModel)]="selectedAnimal.age">
-        <input [(ngModel)]="selectedAnimal.diet">
-        <input [(ngModel)]="selectedAnimal.location">
-        <input [(ngModel)]="selectedAnimal.caretakers">
-        <input [(ngModel)]="selectedAnimal.sex">
-        <input [(ngModel)]="selectedAnimal.likes">
-        <input [(ngModel)]="selectedAnimal.dislikes">
 
-      <button (click)="editKindAttribute(selectedAnimal.name)">Edit Animal</button>
-
+        <edit-animal [childSelectedAnimal]="selectedAnimal" (doneButtonClickedSender)="finishedEditing()"></edit-animal>
     </div>
 
-    <button (click)="checkYoungAnimals()">Check to see which animals are young animals (<2 years old)</button>
-    <div *ngIf="showYoungAnimals">
-    <ul>
-    <li *ngFor="let youngAnimal of youngAnimals">{{youngAnimal.name}}</li>
-    </ul>
-    </div>
-
-    <button (click)="checkOldAnimals()">Check to see which animals are old animals (<10 years old)</button>
-    <div *ngIf="showOldAnimals">
-    <ul>
-    <li *ngFor="let oldAnimal of oldAnimals">{{oldAnimal.name}}</li>
-    </ul>
-    </div>
-
-
-    <h2>Add another animal</h2>
-    <form>
-    <label for="animalSpecies">Enter the animal's species</label>
-    <input type="text" #animalSpecies><br>
-    <label for="animalName">Enter the animal's name</label>
-    <input type="text" #animalName><br>
-    <label for="animalAge">Enter the animal's age</label>
-    <input type="number" #animalAge><br>
-    <label for="animalDiet">Enter the animal's diet</label>
-    <input type="text" #animalDiet><br>
-    <label for="animalLocation">Enter the animal's location</label>
-    <input type="text" #animalLocation><br>
-    <label for="animalCaretakers">Enter the number of caretakers</label>
-    <input type="number" #animalCaretakers><br>
-    <label for="animalSex">Enter the sex of the animal</label>
-    <input type="text" #animalSex><br>
-    <label for="animalLikes">Enter the animal's likes</label>
-    <input type="text" #animalLikes><br>
-    <label for="animalDislikes">Enter the animals dislikes</label>
-    <input type="text" #animalDislikes><br>
-
-    <button (click)="newKind(animalSpecies.value, animalName.value, animalAge.value, animalDiet.value, animalLocation.value, animalCaretakers.value, animalSex.value, animalLikes.value, animalDislikes.value )">Add!</button>
-    </form>
   `
+  // <animal-edit [childAnimalEdit]="masterAnimalsList" (clickSender)="editAnimal($event)"></animal-edit>
 })
 
 export class AppComponent {
-  animals: Animal[] = [
+  masterAnimalsList: Animal[] = [
     new Animal("Northwest Black Tailed Deer", "Tinkerbell", 8, "Herbivore", "Northern Trail", 2, "Female", "Delicate roots and leaves", "Loud noises"),
     new Animal("Arctic Fox", "Moon", 1, "Carnivore", "Northern Trail", 5, "Female", "Cool shade", "Loud noises"),
     new Animal("Ocelot", "Prince", 12, "Carnivore", "Tropical Rain Forest Building", 6, "Male", "Laying in the sunshine", "Non-rope-based toys"),
   ];
-  selectedAnimal = null;
-  youngAnimals: Animal[] = []
-  oldAnimals: Animal[] = []
-  selectedKind: Animal = this.animals[0];
-  showYoungAnimals: boolean = false;
-  showOldAnimals: boolean = false;
 
-  newKind(species, name, age, diet, location, caretakers, sex, likes, dislikes) {
-    let newAnimal = new Animal(species, name, age, diet, location, caretakers, sex, likes, dislikes);
-    this.animals.push(newAnimal);
-  }
+  selectedAnimal = null;
+  selectedKind: Animal = this.masterAnimalsList[0];
+  addAnAnimal = null;
 
   viewAnimal(clickedAnimal){
     this.selectedAnimal = clickedAnimal;
   }
 
-  checkYoungAnimals(){
-    this.showYoungAnimals = !this.showYoungAnimals;
-    this.getYoungAnimals();
+  addAnimal(newAnimalFromChild: Animal){
+    this.masterAnimalsList.push(newAnimalFromChild);
   }
 
-  getYoungAnimals() {
-    this.animals.forEach((animal) => {
-      if (animal.age < 3) {
-        this.youngAnimals.push(animal);
-      }
-    })
-  }
+  editAnimal(clickedAnimal) {
+      this.selectedAnimal = clickedAnimal;
+    }
 
-  checkOldAnimals(){
-    this.showOldAnimals = !this.showOldAnimals;
-    this.getOldAnimals();
-  }
+    finishedEditing() {
+   this.selectedAnimal = null;
+ }
 
-  getOldAnimals() {
-    this.animals.forEach((animal) => {
-      if (animal.age > 10) {
-        this.oldAnimals.push(animal);
-      }
-    })
-  }
 
-}
 
-export class Animal {
-  constructor(
-    public species: string,
-    public name: string,
-    public age: number,
-    public diet: string,
-    public location: string,
-    public caretakers: number,
-    public sex: string,
-    public likes: string,
-    public dislikes: string){}
+
 }
