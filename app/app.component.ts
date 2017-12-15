@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }  from '@angular/forms';
 import { Animal } from './animal.model';
 import { EditAnimalComponent } from './edit-animal.component';
+import { NewAnimalComponent } from './new-animal.component';
 
 @Component({
   selector: 'app-root',
@@ -38,8 +39,9 @@ import { EditAnimalComponent } from './edit-animal.component';
         <edit-animal [childSelectedAnimal]="selectedAnimal" (doneButtonClickedSender)="finishedEditing()"></edit-animal>
     </div>
 
+    <new-animal (newAnimalSender)="addAnimal($event)"></new-animal>
+
   `
-  // <animal-edit [childAnimalEdit]="masterAnimalsList" (clickSender)="editAnimal($event)"></animal-edit>
 })
 
 export class AppComponent {
@@ -57,10 +59,6 @@ export class AppComponent {
     this.selectedAnimal = clickedAnimal;
   }
 
-  addAnimal(newAnimalFromChild: Animal){
-    this.masterAnimalsList.push(newAnimalFromChild);
-  }
-
   editAnimal(clickedAnimal) {
       this.selectedAnimal = clickedAnimal;
     }
@@ -69,6 +67,9 @@ export class AppComponent {
    this.selectedAnimal = null;
  }
 
+addAnimal(newAnimalFromChild: Animal) {
+  this.masterAnimalsList.push(newAnimalFromChild);
+}
 
 
 
